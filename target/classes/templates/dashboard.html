@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 80px;
+            width: 95%; /* Increased container width */
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+        }
+
+         .tagline h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        .container button {
+            font-size: 12px; /* Increase font size */
+            padding: 10px 20px; /* Adjust padding */
+            margin: 7px;
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <h1>Welcome ADMIN</h1>
+    <div>
+        <a th:href="@{/addbooks}" href="addbooks.html"><button>Add Book</button></a>
+        <a th:href="@{/booksearch}" href="booksearch.html"><button>Search Book</button></a>
+        <a th:href="@{/bookupdate}" href="addbooks.html"><button>Update Book</button></a>
+        <a th:href="@{/viewOrder}" href="vieworder.html"><button>View Order</button></a>
+        <a th:href="@{/homepage}" href="homepage.html"><button>Sign Out</button></a>
+    </div>
+</div>
+</body>
+</html>

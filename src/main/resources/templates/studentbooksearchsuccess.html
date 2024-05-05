@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Search</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 20px 80px; /* Adjusted padding */
+            width: 95%; /* Increased container width */
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black; /* Add border to the table */
+            margin-top: 20px; /* Added margin top */
+        }
+
+        th, td {
+            border: 1px solid black; /* Add border to table cells */
+            padding: 8px;
+            text-align: left;
+        }
+
+        .button-container {
+            margin-top: 20px; /* Added margin top */
+        }
+
+        .button-container button {
+            margin-top: 10px; /* Added margin top for spacing */
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <div>
+        <a th:href="@{/studentbooksearch}" href="studentbooksearch.html"><button>Book Search</button></a>
+        <a th:href="@{/returnbook}" href="returnbook.html"><button>Return Book</button></a>
+        <a th:href="@{/placeorderpage}" href="placeorderpage.html"><button>Place Order</button></a>
+        <a th:href="@{/homepage}" href="homepage.html"><button>Logout</button></a>
+    </div>
+    <h1>Book Search</h1>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Check if 'books' is not null and not empty before iterating -->
+        <tr th:if="${books != null and not #lists.isEmpty(books)}" th:each="book : ${books}">
+            <td th:text="${book.title}">Title</td>
+            <td th:text="${book.author}">Author</td>
+            <td th:text="${book.quantity}">Quantity</td>
+        </tr>
+        <!-- Handle the case when 'books' is null or empty -->
+        <tr th:if="${books == null or #lists.isEmpty(books)}">
+            <td colspan="3">No books available</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Button to add the book to the cart -->
+    <div class="button-container">
+        <button th:if="${not #lists.isEmpty(books)}">
+            <a th:href="@{/placeorder(bookTitle=${books[0].title}, bookAuthor=${books[0].author})}">ADD To Place Order</a>
+        </button>
+    </div>
+</div>
+</body>
+</html>

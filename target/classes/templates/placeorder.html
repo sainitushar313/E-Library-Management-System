@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 20px; /* Adjusted padding */
+            width: 95%; /* Increased container width */
+            max-width: 800px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow for a raised effect */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        table {
+            margin-top: 20px; /* Added margin to separate from buttons */
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        form {
+            margin-top: 20px; /* Added margin to separate from table */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%; /* Make form take full width */
+        }
+
+        form label {
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"] {
+            width: 50%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <div>
+        <a th:href="@{/studentbooksearch}" href="studentbooksearch.html"><button>Book Search</button></a>
+        <a th:href="@{/returnbook}" href="returnbook.html"><button>Return Book</button></a>
+        <a th:href="@{/placeorderpage}" href="placeorderpage.html"><button>Place Order</button></a>
+        <a th:href="@{/homepage}" href="homepage.html"><button>Logout</button></a>
+    </div>
+
+    <h2>Place Order</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${bookTitle}">Title</td>
+            <td th:text="${bookAuthor}">Author</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Form to place the order -->
+    <form th:action="@{/placeOrder}" method="post">
+        <input type="hidden" name="bookTitle" th:value="${bookTitle}" />
+        <input type="hidden" name="bookAuthor" th:value="${bookAuthor}" />
+
+        <label for="rollno">Roll no:</label>
+        <input type="text" id="rollno" name="rollno" required />
+
+        <button type="submit">Place Order</button>
+    </form>
+
+</div>
+</body>
+</html>

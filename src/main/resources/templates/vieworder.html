@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 80px;
+            width: 95%; /* Increased container width */
+            height: auto;
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px; /* Added margin bottom for spacing */
+        }
+
+        .button-container a {
+            text-decoration: none;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black; /* Add border to the table */
+            margin-bottom: 20px; /* Added margin bottom for spacing */
+        }
+
+        th, td {
+            border: 1px solid black; /* Add border to table cells */
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <div class="button-container">
+        <a th:href="@{/addbooks}" href="addbooks.html"><button>Add Book</button></a>
+        <a th:href="@{/booksearch}" href="booksearch.html"><button>Search Book</button></a>
+        <a th:href="@{/bookupdate}" href="addbooks.html"><button>Update Book</button></a>
+        <a th:href="@{/viewOrder}" href="vieworder.html"><button>View Order</button></a>
+        <a th:href="@{/homepage}" href="homepage.html"><button>Sign Out</button></a>
+    </div>
+
+    <form action="/viewOrder" method="get">
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Issue Date</th>
+                <th>Expire Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Assuming bookList is a list of Book objects available in the model -->
+            <tr th:each="book : ${bookList}">
+                <td th:text="${book.rollno}">Roll no</td>
+                <td th:text="${book.title}">Title</td>
+                <td th:text="${book.author}">Author</td>
+                <td th:text="${book.issuedate}">Issue Date</td>
+                <td th:text="${book.expirydate}">Expire Date</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

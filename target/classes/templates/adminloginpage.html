@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+         .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 40px; /* Adjusted padding */
+            width: 95%; /* Increased container width */
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+            position: relative; /* Make the container relative */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%; /* Make the form take full width */
+        }
+
+        form div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%; /* Take full width */
+            margin-bottom: 20px;
+        }
+
+        form label {
+            width: 100px; /* Fixed width for labels */
+            text-align: right; /* Align labels to the right */
+            margin-right: 10px; /* Add margin between label and input */
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            flex: 1; /* Take remaining width */
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Add border to input fields */
+            border-radius: 3px; /* Add border radius */
+        }
+
+        form button {
+            margin-top: 10px;
+        }
+
+        .back-button {
+            position: absolute; /* Position absolutely */
+            top: 10px; /* 10 pixels from the top */
+            left: 10px; /* 10 pixels from the left */
+            padding: 10px; /* Padding for the button */
+            background-color: white; /* Button background color */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Add border radius */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            text-decoration: none; /* Remove underline */
+            color: black; /* Set text color */
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <a th:href="@{/homepage}" class="back-button">Back to Role</a>
+    <h1>Admin Login</h1>
+    <form th:action="@{/adminloginpage}" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+</body>
+</html>

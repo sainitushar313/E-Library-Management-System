@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 80px;
+            width: 95%; /* Increased container width */
+            height: 150px;
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            justify-content: space-between; /* Space between items */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative; /* Add relative positioning */
+        }
+
+        .button button {
+            font-size: 30px; /* Reduced font size */
+            height: 100px; /* Reduced button height */
+            min-width: 100px; /* Reduced button width */
+            margin: px;
+            display: flex;
+            align-items: center; /* Align image and text vertically */
+            justify-content: center; /* Center text horizontally */
+            cursor: pointer;
+        }
+
+        .button img {
+            width: 60px; /* Reduced image width */
+            height: auto; /* Maintain aspect ratio */
+            position: absolute; /* Position the image absolutely */
+            top: -40px; /* Adjust vertical position */
+            left: 50%; /* Position the image horizontally centered */
+            transform: translateX(-50%); /* Adjust horizontal position */
+        }
+
+        .button button img {
+            margin-bottom: 2px; /* Added space between image and text */
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <div class="button">
+        <img src="/Images/admin.png" alt="Admin Icon"> <!-- Place admin.png above the ADMIN button -->
+        <button>
+            <a th:href="@{/main/adminloginpage}" href="adminloginpage.html">ADMIN</a>
+        </button>
+    </div>
+    <div class="button">
+        <img src="/Images/student.png" alt="Student Icon"> <!-- Place student.png above the STUDENT button -->
+        <button>
+            <a th:href="@{/main/studentloginpage}" href="studentloginpage.html">STUDENT</a>
+        </button>
+    </div>
+
+</div>
+</body>
+</html>

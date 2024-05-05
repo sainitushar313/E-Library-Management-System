@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Return Book</title>
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('/Images/library.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; /* Align content vertically */
+    }
+
+    .container {
+        background-color: #00b5cc;
+        border-radius: 5px;
+        padding: 20px 80px; /* Adjusted padding */
+        width: 95%; /* Increased container width */
+        max-width: 600px; /* Adjusted maximum width */
+        display: flex;
+        flex-direction: column; /* Align items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    .tagline h1 {
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 20px; /* Added margin bottom */
+    }
+
+    .buttons {
+        margin-bottom: 20px; /* Added margin bottom */
+    }
+
+    .buttons button {
+        margin: 0 10px; /* Added margin between buttons */
+
+    }
+
+    .book-list {
+        margin-top: 5px; /* Added margin top */
+    }
+
+    .hidden {
+        display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="tagline">
+  <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+  <div class="buttons">
+    <a th:href="@{/studentbooksearch}" href="studentbooksearch.html"><button>Book Search</button></a>
+    <a th:href="@{/returnbook}" href="returnbook.html"><button>Return Book</button></a>
+    <a th:href="@{/placeorderpage}" href="placeorderpage.html"><button>Place Order</button></a>
+    <a th:href="@{/homepage}" href="homepage.html"><button>Logout</button></a>
+  </div>
+
+<form action="/returnbook" method="post">
+  <label for="rollno">Roll Number:</label>
+  <input type="text" id="rollno" name="rollno" required>
+  <button type="submit">Search</button>
+</form>
+
+  <h1>Return Book</h1>
+
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Roll No</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>issuedate</th>
+    <th>expirydate</th>
+    <th>Calculate Fine</th>
+    <th>Fine</th>
+    <th>Return</th>
+  </tr>
+    </thead>
+    <tbody>
+  <tr th:each="book : ${bookList}">
+    <td th:text="${book.rollno}"></td>
+
+    <td th:text="${book.title}"></td>
+    <td th:text="${book.author}"></td>
+    <td th:text="${book.issuedate}"></td>
+    <td th:text="${book.expirydate}"></td>
+    <td>
+      <button class="calculate-fine-button" onclick="calculateFine(this)">Calculate</button>
+    </td>
+    <td class="fine" th:text="${book.fine}">Fine</td>
+
+    <td>
+      <button class="return-button" th:attr="data-rollno=${book.rollno}, data-title=${book.title}" onclick="returnBook(this)">Return</button>
+    </td>
+
+
+  </tr>
+    </tbody>
+</table>
+  <h3 class="hidden">Book Return Successfully</h3>
+
+</div>
+
+<script>
+  function calculateFine(button) {
+      var row = button.parentNode.parentNode;
+      var issueDate = new Date(row.querySelector('td:nth-child(4)').textContent);
+      var expiryDate = new Date(issueDate);
+      expiryDate.setDate(expiryDate.getDate() + 15); // Expiry date is 15 days after the issue date
+      var fineCell = row.querySelector('.fine');
+      var today = new Date();
+
+      // Set all dates to the same time of day to compare only dates
+      issueDate.setHours(0, 0, 0, 0);
+      expiryDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      if (today <= expiryDate) {
+          fineCell.textContent = '0';
+      } else {
+          var differenceInTime = today.getTime() - expiryDate.getTime();
+          var differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+          var fine = differenceInDays * 10; // 10 rupees per day
+          fineCell.textContent = fine;
+      }
+  }
+
+  function returnBook(button) {
+    var rollNo = button.getAttribute('data-rollno');
+    var title = button.getAttribute('data-title');
+
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row); // Remove the row from the table
+
+    // Send an asynchronous request to delete the book from the backend
+    fetch(`/books?rollno=${rollNo}&title=${title}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to delete book.');
+        }
+        // Handle success
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+</script>
+
+
+</body>
+</html>

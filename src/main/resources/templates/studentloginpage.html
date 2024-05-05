@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+       .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 40px; /* Adjusted padding */
+            width: 95%; /* Increased container width */
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+            position: relative; /* Make the container relative */
+        }
+
+        .tagline h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        form {
+            width: 100%; /* Set form width to 100% */
+            display: flex;
+            flex-direction: column; /* Align form items vertically */
+            align-items: center; /* Center form items horizontally */
+            margin-bottom: 20px; /* Added margin bottom for spacing */
+        }
+
+        label {
+            margin-right: 10px; /* Added margin-right for spacing */
+        }
+
+        input {
+            flex: 1; /* Take remaining width */
+            padding: 8px; /* Added padding */
+            margin-bottom: 10px; /* Added margin-bottom for spacing */
+        }
+
+        button {
+            margin-top: 10px; /* Added margin-top for spacing */
+            padding: 10px 20px; /* Adjusted padding */
+        }
+
+        button a {
+            text-decoration: none; /* Remove underline */
+            color: black; /* Set text color */
+        }
+
+        button.register {
+            background-color: #4CAF50; /* Green background */
+            border: none;
+        }
+              .back-button {
+            position: absolute; /* Position absolutely */
+            top: 10px; /* 10 pixels from the top */
+            left: 10px; /* 10 pixels from the left */
+            padding: 10px; /* Padding for the button */
+            background-color: white; /* Button background color */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Add border radius */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            text-decoration: none; /* Remove underline */
+            color: black; /* Set text color */
+        }
+    </style>
+</head>
+<body>
+<div class="tagline">
+    <h1>e-Library Management System</h1>
+</div>
+
+<div class="container">
+    <a th:href="@{/homepage}" class="back-button">Back to Role</a>
+
+    <h1>Student Login</h1>
+    <form th:action="@{/studentloginpage}" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button>
+                <a>Login</a>
+            </button>
+        </div>
+    </form>
+
+    <button class="register">
+        <a th:href="@{/studentregistration}" href="studentregistration.html">Register</a>
+    </button>
+</div>
+</body>
+</html>

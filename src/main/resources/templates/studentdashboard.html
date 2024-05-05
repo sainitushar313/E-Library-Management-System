@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Button Redirect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/Images/library.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Align content vertically */
+        }
+
+        .container {
+            background-color: #00b5cc;
+            border-radius: 5px;
+            padding: 20px 80px; /* Adjusted padding */
+            width: 95%; /* Increased container width */
+            max-width: 600px; /* Adjusted maximum width */
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        .tagline h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        .buttons {
+            margin-bottom: 20px; /* Added margin bottom for spacing */
+        }
+
+        .buttons button {
+            margin: 10px; /* Added margin for spacing */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="tagline">
+        <h1>Welcome to the world of books</h1>
+    </div>
+    <div class="buttons">
+        <a th:href="@{/studentbooksearch}" href="studentbooksearch.html"><button>Book Search</button></a>
+        <a th:href="@{/returnbook}" href="returnbook.html"><button>Return Book</button></a>
+        <a th:href="@{/placeorderpage}" href="placeorderpage.html"><button>Place Order</button></a>
+        <a th:href="@{/homepage}" href="homepage.html"><button>Logout</button></a>
+    </div>
+
+</div>
+
+</body>
+</html>
